@@ -33,7 +33,16 @@ namespace PotterKata.Tests
             AddBookToTheBasket("First book");
             AddBookToTheBasket("First book");
 
-            OnCheckoutCostShouldBe(16);
+            OnCheckoutCostShouldBe(16.0);
+        }
+
+        [Test]
+        public void when_we_add_the_first_book_and_the_second_book_to_the_basket_a_5_percent_discount_applies_so_the_cost_is_15_euros_20_on_checkout()
+        {
+            AddBookToTheBasket("First book");
+            AddBookToTheBasket("Second book");
+
+            OnCheckoutCostShouldBe(15.20);
         }
 
         private void AddBookToTheBasket(string bookTitle)
