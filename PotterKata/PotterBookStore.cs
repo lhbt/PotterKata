@@ -8,11 +8,25 @@ namespace PotterKata
         private const int CostOfASingleBook = 8;
         private const double DiscountToApplyForTwoDifferentBooks = 0.95;
         private const double DiscountToApplyForThreeDifferentBooks = 0.9;
+        private const double DiscountToApplyForFourDifferentBooks = 0.8;
 
         private double _totalCost;
 
+        private readonly Dictionary<int, double> _discountsToApplyByNumberOfDifferentBooksInTheBasket = new Dictionary<int, double>
+        {
+            { 2, DiscountToApplyForTwoDifferentBooks },
+            { 3, DiscountToApplyForThreeDifferentBooks },
+            { 4, DiscountToApplyForFourDifferentBooks },
+        }; 
+
         private readonly List<string> _booksInTheBasket = new List<string>();
-        
+
+        public void AddBookToTheBasket(string bookTitle)
+        {
+            _booksInTheBasket.Add(bookTitle);
+            _totalCost += CostOfASingleBook;
+        }
+
         public double Checkout()
         {
             if (DiscountShouldBeApplied())
@@ -25,28 +39,33 @@ namespace PotterKata
 
         private double CalculateDiscountedPrice()
         {
-            if (_booksInTheBasket.Count == 3)
-            {
-                return _totalCost*DiscountToApplyForThreeDifferentBooks;
-            }
+            var discountToApply = GetDiscountToApply();
+            
+            return _totalCost * discountToApply;
+        }
 
-            return _totalCost * DiscountToApplyForTwoDifferentBooks;
+        private double GetDiscountToApply()
+        {
+            var numberOfDifferentBooksInTheBasket = GetNumberOfDifferentBooksInTheBasket();
+
+            return _discountsToApplyByNumberOfDifferentBooksInTheBasket[numberOfDifferentBooksInTheBasket];
         }
 
         private bool DiscountShouldBeApplied()
         {
-            return _booksInTheBasket.Count >= 2 && BooksInTheBasketAreNotTheSame();
+            var thereAreAtLeastTwoBooksInTheBasket = _booksInTheBasket.Count >= 2;
+
+            return thereAreAtLeastTwoBooksInTheBasket && BooksInTheBasketAreNotTheSame();
         }
 
         private bool BooksInTheBasketAreNotTheSame()
         {
-            return _booksInTheBasket.Count == _booksInTheBasket.Distinct().Count();
+            return _booksInTheBasket.Count == GetNumberOfDifferentBooksInTheBasket();
         }
-
-        public void AddBookToTheBasket(string bookTitle)
+        
+        private int GetNumberOfDifferentBooksInTheBasket()
         {
-            _booksInTheBasket.Add(bookTitle);
-            _totalCost += CostOfASingleBook;
+            return _booksInTheBasket.Distinct().Count();
         }
     }
 }

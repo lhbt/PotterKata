@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace PotterKata.Tests
 {
@@ -35,24 +36,15 @@ namespace PotterKata.Tests
 
             OnCheckoutCostShouldBe(16.0);
         }
-
-        [Test]
-        public void when_we_add_the_first_book_and_the_second_book_to_the_basket_a_5_percent_discount_applies_so_the_cost_is_15_euros_20_on_checkout()
+        
+        [TestCase(new[] { "First book", "Second book" }, 15.20)]
+        [TestCase(new[] { "First book", "Second book", "Third book" }, 21.60)]
+        [TestCase(new[] { "First book", "Second book", "Third book", "Fourth book" }, 25.60)]
+        public void when_we_add_different_books_to_the_checkout_a_the_cost_is_discounted_by_an_amount_depending_on_the_number_of_different_books(string[] books, double expectedCost)
         {
-            AddBookToTheBasket("First book");
-            AddBookToTheBasket("Second book");
-
-            OnCheckoutCostShouldBe(15.20);
-        }
-
-        [Test]
-        public void when_we_add_three_different_books_to_the_basket_a_10_percent_discount_applies_so_the_cost_is_21_euros_60_on_checkout()
-        {
-            AddBookToTheBasket("First book");
-            AddBookToTheBasket("Second book");
-            AddBookToTheBasket("Third book");
-
-            OnCheckoutCostShouldBe(21.6);
+            Array.ForEach(books, AddBookToTheBasket);
+            
+            OnCheckoutCostShouldBe(expectedCost);
         }
 
         private void AddBookToTheBasket(string bookTitle)
