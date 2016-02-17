@@ -22,12 +22,26 @@ namespace PotterKata.Tests
         [Test]
         public void when_we_add_the_first_book_to_the_basket_and_we_checkout_the_cost_is_8()
         {
-            _potterBookStore.AddBookToTheBasket("First book");
+            AddBookToTheBasket("First book");
 
             OnCheckoutCostShouldBe(8);
         }
 
-        private void OnCheckoutCostShouldBe(int expectedCost)
+        [Test]
+        public void when_we_add_the_first_book_to_the_basket_twice_the_cost_is_16()
+        {
+            AddBookToTheBasket("First book");
+            AddBookToTheBasket("First book");
+
+            OnCheckoutCostShouldBe(16);
+        }
+
+        private void AddBookToTheBasket(string bookTitle)
+        {
+            _potterBookStore.AddBookToTheBasket(bookTitle);
+        }
+
+        private void OnCheckoutCostShouldBe(double expectedCost)
         {
             var cost = _potterBookStore.Checkout();
 

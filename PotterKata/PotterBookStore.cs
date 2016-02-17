@@ -9,9 +9,9 @@
             return _cost;
         }
 
-        public void AddBookToTheBasket(string firstBook)
+        public void AddBookToTheBasket(string bookTitle)
         {
-            _cost = 8;
+            _cost += 8;
         }
     }
 }
