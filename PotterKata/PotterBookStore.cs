@@ -1,10 +1,17 @@
-﻿namespace PotterKata.Tests
+﻿namespace PotterKata
 {
     public class PotterBookStore
     {
+        private double _cost;
+
         public double Checkout()
         {
-            return 0;
+            return _cost;
+        }
+
+        public void AddBookToTheBasket(string firstBook)
+        {
+            _cost = 8;
         }
     }
 }
