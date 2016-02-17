@@ -45,6 +45,16 @@ namespace PotterKata.Tests
             OnCheckoutCostShouldBe(15.20);
         }
 
+        [Test]
+        public void when_we_add_three_different_books_to_the_basket_a_10_percent_discount_applies_so_the_cost_is_21_euros_60_on_checkout()
+        {
+            AddBookToTheBasket("First book");
+            AddBookToTheBasket("Second book");
+            AddBookToTheBasket("Third book");
+
+            OnCheckoutCostShouldBe(21.6);
+        }
+
         private void AddBookToTheBasket(string bookTitle)
         {
             _potterBookStore.AddBookToTheBasket(bookTitle);
