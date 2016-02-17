@@ -9,6 +9,7 @@ namespace PotterKata
         private const double DiscountToApplyForTwoDifferentBooks = 0.95;
         private const double DiscountToApplyForThreeDifferentBooks = 0.9;
         private const double DiscountToApplyForFourDifferentBooks = 0.8;
+        private const double DiscountToApplyForFiveDifferentBooks = 0.75;
 
         private double _totalCost;
 
@@ -17,6 +18,7 @@ namespace PotterKata
             { 2, DiscountToApplyForTwoDifferentBooks },
             { 3, DiscountToApplyForThreeDifferentBooks },
             { 4, DiscountToApplyForFourDifferentBooks },
+            { 5, DiscountToApplyForFiveDifferentBooks },
         }; 
 
         private readonly List<string> _booksInTheBasket = new List<string>();

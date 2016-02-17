@@ -40,6 +40,7 @@ namespace PotterKata.Tests
         [TestCase(new[] { "First book", "Second book" }, 15.20)]
         [TestCase(new[] { "First book", "Second book", "Third book" }, 21.60)]
         [TestCase(new[] { "First book", "Second book", "Third book", "Fourth book" }, 25.60)]
+        [TestCase(new[] { "First book", "Second book", "Third book", "Fourth book", "Fifth book" }, 30)]
         public void when_we_add_different_books_to_the_checkout_a_the_cost_is_discounted_by_an_amount_depending_on_the_number_of_different_books(string[] books, double expectedCost)
         {
             Array.ForEach(books, AddBookToTheBasket);
